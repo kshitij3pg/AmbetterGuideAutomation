@@ -1,0 +1,18 @@
+{
+    "searchResults":{
+        "homeState":"div[id='main-content']",
+        "stateDropDown":"div[data-testid='autocomplete-menu']",
+        "submitButton":"button[type='submit']",
+        "procedureLabel":"input[placeholder='Start searching here...']",
+        "procedureDropDown":"li[data-testid='autoCompleteMenuItem']",
+        "locationLabel":"input[placeholder='Location']",
+        "cityDropDown":"div[class='pac-item']",
+        "searchButton":"button[data-testid='search-button']",
+        "detailPageButton":"div[data-testid='searchResults']",
+        "npiNumber":"div[data-copytype='npi']",
+        "providerName":"h1[data-testid='signature']",
+        "advancedSearchTab":"a[href='/advanced-search']",
+        "npiNumberLabel":"input[data-testid='advancedKeywordInput']",
+        "providerNameVerification":"span[data-testid='signature']"
+    }
+}

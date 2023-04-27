@@ -1,5 +1,5 @@
 {
-    "searchResults":{
+    "searchResultsLocators":{
         "homeState":"div[id='main-content']",
         "stateDropDown":"div[data-testid='autocomplete-menu']",
         "submitButton":"button[type='submit']",

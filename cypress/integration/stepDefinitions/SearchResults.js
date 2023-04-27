@@ -16,17 +16,12 @@ When("I choose home state option",()=>{
 })
 When("Select state and coverage year and click on continue button",()=>{
     cy.get('div[id="main-content"]').children().children().next().children().children().next().children().children().children().children().first().type("New")
-
-    cy.get('div[data-testid="autocomplete-menu"]').each(($ele, index, $list)=>{
-        if($ele.text().includes("New Jersey")){
-            cy.wrap($ele).click()
-        }
-    })
+    cy.wait(5000)
+    cy.selectFromDropDown('div[data-testid="autocomplete-menu"]','New Jersey')
     cy.wait(5000)
     cy.get('button[type="submit"]').click()
 })
 And("Select a network and click on start browsing button",()=>{
-    
     cy.get('button[type="submit"]').click()
 })
 And("Search doctors using procedure and city and click on Search button",()=>{
@@ -38,24 +33,17 @@ And("Search doctors using procedure and city and click on Search button",()=>{
     })
     cy.get('input[placeholder="Location"]').clear()
     cy.get('input[placeholder="Location"]').type("New")
-    cy.get('div[class="pac-item"]').each(($ele, index, $list)=>{
-        if($ele.text().includes("New York")){
-            cy.wrap($ele).click()
-        }
-    })
+    cy.selectFromDropDown('div[class="pac-item"]','New York')
     cy.get('button[data-testid="search-button"]').click()
     cy.wait(8000)
 })
 And("Healthcare providers should be visible",()=>{
-    
     if(cy.contains("View profile")){
         cy.log("Results found!!")
-    }
-    else{
+    }else{
         cy.log("Results not found!!")
     }
 })
-
 
 When("I click on a healthcare provider and details page open",()=>{
     cy.get('div[data-testid="searchResults"]').children().next().children().children().next().children().next().children().children().eq(0).click()
@@ -63,10 +51,9 @@ When("I click on a healthcare provider and details page open",()=>{
 var NPI, Provider
 And("I copy NPI number",()=>{
     cy.wait(2000)
-    cy.get('div[data-copytype="npi"]').invoke('text').as('NPInumber')
-    cy.get('@NPInumber').then((NPInum)=>{
-        NPI=NPInum
-        cy.contains(NPI.substring(5,15))
+    cy.get('div[data-copytype="npi"]').invoke('text').as('Npi')
+    cy.get('@Npi').then((NpiNum)=>{
+        NPI=NpiNum
     })
     cy.get('h1[data-testid="signature"]').invoke('text').as('ProviderName')
     cy.get('@ProviderName').then((Name)=>{
@@ -81,8 +68,9 @@ And("Paste the NPI number in the label",()=>{
 })
 And("Click on Submit button",()=>{
     cy.contains("Submit").click()
+    cy.wait(8000)
 })
 Then("The same healthcare provider must be available in search Results",()=>{
-    cy.get('span[data-testid="signature"]').should("have.text",Provider)
+    cy.verifyText('span[data-testid="signature"]',Provider)
 })
 
